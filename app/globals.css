@@ -1,0 +1,261 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-space-grotesk), 'Space Grotesk', sans-serif;
+  --font-display: var(--font-anton), 'Anton', sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+}
+
+/* Dark portfolio theme */
+:root {
+  color-scheme: dark;
+  --background: #060b18;
+  --foreground: #eef2ff;
+  --card: #0c1428;
+  --card-foreground: #eef2ff;
+  --popover: #0c1428;
+  --popover-foreground: #eef2ff;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: #101c38;
+  --secondary-foreground: #eef2ff;
+  --muted: #101c38;
+  --muted-foreground: #8fa3c8;
+  --accent: #fbbf24;
+  --accent-foreground: #060b18;
+  --destructive: #ef4444;
+  --border: rgba(143, 163, 200, 0.18);
+  --input: rgba(143, 163, 200, 0.18);
+  --ring: #3b82f6;
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+}
+
+/* Marquee ribbon */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee-slow {
+  animation: marquee 45s linear infinite;
+}
+
+/* Floating sticker wobble */
+@keyframes float-wobble {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--wobble-rot, -2deg));
+  }
+  50% {
+    transform: translateY(-10px) rotate(calc(var(--wobble-rot, -2deg) * -1));
+  }
+}
+
+.animate-float {
+  animation: float-wobble 5s ease-in-out infinite;
+}
+
+/* Blinking cursor */
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Vending machine neon glow */
+@keyframes neon-pulse {
+  0%,
+  100% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.7));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 16px rgba(59, 130, 246, 1));
+  }
+}
+
+.animate-neon {
+  animation: neon-pulse 2.4s ease-in-out infinite;
+}
+
+/* Coin shine */
+@keyframes coin-shine {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 3px rgba(251, 191, 36, 0.4),
+      0 4px 20px rgba(251, 191, 36, 0.5);
+  }
+  50% {
+    box-shadow:
+      0 0 0 6px rgba(251, 191, 36, 0.2),
+      0 4px 32px rgba(251, 191, 36, 0.8);
+  }
+}
+
+.animate-coin {
+  animation: coin-shine 1.8s ease-in-out infinite;
+}
+
+/* Slow spin for round badges */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 14s linear infinite;
+}
+
+/* Grain overlay */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Sticky note shadow */
+.sticky-note {
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.35),
+    inset 0 -40px 40px -40px rgba(0, 0, 0, 0.12);
+}
+
+/* Handwritten fonts for the scrapbook/notebook section */
+.font-hand {
+  font-family: var(--font-caveat), cursive;
+}
+
+.font-marker {
+  font-family: var(--font-marker), cursive;
+}
+
+/* Notebook / scrapbook stage — dark navy, matching the site theme */
+.notebook-paper {
+  background-color: #081020;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 35px,
+      rgba(59, 130, 246, 0.08) 35px,
+      rgba(59, 130, 246, 0.08) 36px
+    ),
+    radial-gradient(120% 80% at 50% 0%, rgba(59, 130, 246, 0.07), transparent 60%);
+}
+
+/* Glowing ink line */
+.ink-glow {
+  filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.9)) drop-shadow(0 0 18px rgba(59, 130, 246, 0.45));
+}
+
+/* Traveling ink dot at the tip of the line */
+.ink-dot {
+  filter: drop-shadow(0 0 8px rgba(96, 165, 250, 1)) drop-shadow(0 0 20px rgba(59, 130, 246, 0.8));
+}
+
+/* Polaroid frame — stays paper-white for scrapbook contrast */
+.polaroid {
+  background: #f5f3ec;
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.5),
+    0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Torn tape strips */
+.tape {
+  background: rgba(250, 240, 200, 0.55);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(1px);
+}
+
+/* Taped stat card — dark card with glow border */
+.stat-card {
+  background: #0c1428;
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.45),
+    0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
